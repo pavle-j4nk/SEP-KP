@@ -10,10 +10,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        RequestMatcher notForwarded =  r -> r.getHeader("X-Forwarded-Proto") != null;
+        RequestMatcher notForwarded = r -> r.getHeader("X-Forwarded-Proto") != null;
+        http.requiresChannel().requestMatchers(notForwarded).requiresSecure();
 
-        http.requiresChannel().requestMatchers(notForwarded).requiresSecure()
-                .and().authorizeRequests().antMatchers("/**").permitAll();
+        http.authorizeRequests().anyRequest().permitAll();
 
         http.csrf().disable();
     }
