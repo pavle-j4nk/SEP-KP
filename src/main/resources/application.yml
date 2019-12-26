@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    url: jdbc:h2:./database;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  application:
+    name: kp
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+server:
+  port: 8888
+  ssl:
+    key-store: classpath:keystore.jks
+    key-store-password: 123456
+    key-alias: localhost
+    enabled: false
+    client-auth: none
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone : ${EUREKA_URI:http://dev.local:8761/eureka}
+  instance:
+    prefer-ip-address: false
+    hostname: localhost
+
+kp:
+  url: http://localhost/kp/
